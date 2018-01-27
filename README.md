@@ -1,2 +1,6 @@
 # opentracing
-various opentracing implementations
+
+golang opentracing implementations
+
+* `apexlog` - opentracing wrapper for `github.com/apex/log`
+
