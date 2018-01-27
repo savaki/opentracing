@@ -202,12 +202,20 @@ func (t *Tracer) Extract(format interface{}, carrier interface{}) (opentracing.S
 	return nil, opentracing.ErrUnsupportedFormat
 }
 
-func New(logger log.Interface) *Tracer {
+func New(logger log.Interface, options ...Option) *Tracer {
+	c := &config{
+		msgKey: DefaultMsgKey,
+	}
+	for _, opt := range options {
+		opt(c)
+	}
+
 	if logger == nil {
 		logger = log.Log
 	}
 
 	return &Tracer{
 		logger: logger,
+		msgKey: c.msgKey,
 	}
 }
